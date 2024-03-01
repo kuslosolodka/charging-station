@@ -3,7 +3,9 @@ import { StationService } from './station.service.js';
 import { StationDto } from './types/dto/station.dto.js';
 import { ValidationPipe } from '../pipes/validation/validation.pipe.js';
 import { createStationValidationSchema } from './types/validation-schemas/create-station/create-station.validation-schema.js';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Station routes')
 @Controller('/station')
 export class StationController {
   constructor(private readonly service: StationService) {}
