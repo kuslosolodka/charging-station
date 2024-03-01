@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: server
     ports:
-      - 3000:3000
+      - ${PORT}:3000
     env_file:
       - .env
     restart: on-failure
@@ -16,11 +16,9 @@ services:
     container_name: postgres
     image: postgis/postgis:16-3.4
     ports:
-      - 5432:5432
+      - ${DB_PORT}:5432
     env_file:
       - .env
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
     restart: on-failure
 
 volumes:
