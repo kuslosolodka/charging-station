@@ -11,7 +11,7 @@ const configService = new ConfigService();
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env.local' }),
+    ConfigModule.forRoot({ isGlobal: true}),
     ConnectorModule,
     StationModule,
     TypeOrmModule.forRoot({
