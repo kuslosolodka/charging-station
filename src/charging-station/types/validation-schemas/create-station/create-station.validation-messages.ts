@@ -18,6 +18,6 @@ export const VALIDATION_MESSAGES = {
     LOCATION_COORDINATE_INVALID_TYPE: 'Coordinate should be number',
     LOCATION_INVALID_TYPE: 'Location should be object',
   },
-  EMAIL_FORMAT: 'Email should has @email.com ending',
+  EMAIL_FORMAT: 'Email should has correct format',
   UNKNOWN_KEY: 'Unknown key in the body',
 } as const;
