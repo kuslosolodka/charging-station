@@ -14,14 +14,14 @@ services:
 
   postgres:
     container_name: postgres
-    image: postgres:16.2
+    image: postgis/postgis:16-3.4
     ports:
       - '5432:5432'
     env_file:
       - .env.production
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    restart: unless-stopped
+    restart: always
 
 volumes:
   postgres-data:
