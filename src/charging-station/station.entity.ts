@@ -18,7 +18,7 @@ export class Station {
   @Column({ nullable: true })
   description: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, unique: true })
   email: string;
 
   @Column('geometry', { nullable: true })

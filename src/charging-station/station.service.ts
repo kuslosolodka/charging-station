@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Station } from './station.entity';
@@ -27,6 +27,16 @@ export class StationService {
       'title' | 'description' | 'email' | 'isPublic' | 'location'
     >
   ): Promise<Station> {
+    const isEmailExist = await this.repository.findOne({
+      where: {
+        email: body.email,
+      },
+    });
+
+    if (isEmailExist) {
+      throw new BadRequestException('Email already exists');
+    }
+
     return this.repository.save({
       ...body,
       location: { type: 'Point', ...body.location },
