@@ -15,5 +15,5 @@ export const VALIDATION_MESSAGES = {
   LOCATION_COORDINATE_REQUIRED: 'Coordinate should be present',
   LOCATION_INVALID_TYPE: 'Location should be object',
   UNKNOWN_KEY: 'Unknown key in the body',
-  REQUIRED: 'Required',
+  LOCATION_REQUIRED: 'Location should be present',
 } as const;
