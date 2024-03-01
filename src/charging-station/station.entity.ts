@@ -1,5 +1,11 @@
 import { Connector } from '../charging-connector/connector.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Point } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  Point,
+} from 'typeorm';
 
 @Entity()
 export class Station {
@@ -15,8 +21,8 @@ export class Station {
   @Column({ nullable: true })
   email: string;
 
-  @Column("geometry", {nullable: true})
-    location: Point
+  @Column('geometry', { nullable: true })
+  location: Point;
 
   @Column()
   isPublic: boolean;

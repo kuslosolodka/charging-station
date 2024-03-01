@@ -22,6 +22,34 @@ export const createStationValidationSchema = z
         required_error: VALIDATION_MESSAGES.DESCRIPTION_REQUIRED,
       })
       .optional(),
+    location: z
+      .object(
+        {
+          coordinates: z.tuple(
+            [
+              z.number({
+                invalid_type_error:
+                  VALIDATION_MESSAGES.LOCATION_COORDINATE_INVALID_TYPE,
+                required_error:
+                  VALIDATION_MESSAGES.LOCATION_COORDINATE_REQUIRED,
+              }),
+              z.number({
+                invalid_type_error:
+                  VALIDATION_MESSAGES.LOCATION_COORDINATE_INVALID_TYPE,
+                required_error:
+                  VALIDATION_MESSAGES.LOCATION_COORDINATE_REQUIRED,
+              }),
+            ],
+            {
+              invalid_type_error:
+                VALIDATION_MESSAGES.LOCATION_COORDINATES_INVALID_TYPE,
+              required_error: VALIDATION_MESSAGES.LOCATION_COORDINATES_REQUIRED,
+            }
+          ),
+        },
+        { invalid_type_error: VALIDATION_MESSAGES.LOCATION_INVALID_TYPE }
+      )
+      .optional(),
     isPublic: z.boolean({
       invalid_type_error: VALIDATION_MESSAGES.PUBLICITY_INVALID_TYPE,
       required_error: VALIDATION_MESSAGES.PUBLICITY_REQUIRED,
@@ -29,10 +57,13 @@ export const createStationValidationSchema = z
   })
   .strict(VALIDATION_MESSAGES.UNKNOWN_KEY)
   .refine(
+    // TODO: refactor
     (data) =>
-      data.isPublic ? data.title && data.email && data.description : true,
+      data.isPublic
+        ? data.title && data.email && data.description && data.location
+        : true,
     {
       message: 'Required',
-      path: ['title', 'email', 'description'],
+      path: ['title', 'email', 'description', 'location'],
     }
   );

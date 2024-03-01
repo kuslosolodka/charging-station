@@ -1,4 +1,4 @@
-import { Point } from "typeorm";
+import { Point } from 'typeorm';
 
 export class StationDto {
   title: string;
@@ -7,7 +7,7 @@ export class StationDto {
 
   email: string;
 
-  location: Point
+  location: Point;
 
   isPublic: boolean;
 }

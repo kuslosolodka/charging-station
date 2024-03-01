@@ -4,7 +4,9 @@ import { VALIDATION_MESSAGES } from './create-connector.validation-messages';
 export const createConnectorValidationSchema = z
   .object({
     type: z.enum(['CCS', 'CHAdeMO', 'Type1', 'Type2'], {
-      required_error: VALIDATION_MESSAGES.CONNECTOR_TYPE_REQUIRED
+      errorMap: () => ({
+        message: VALIDATION_MESSAGES.CONNECTOR_TYPE_INVALID_TYPE,
+      }),
     }),
     maxKW: z
       .number({
@@ -17,7 +19,7 @@ export const createConnectorValidationSchema = z
         invalid_type_error: VALIDATION_MESSAGES.STATION_ID_INVALID_TYPE,
         required_error: VALIDATION_MESSAGES.STATION_ID_REQUIRED,
       })
-      .uuid({ message:VALIDATION_MESSAGES.STATION_ID_UUID }),
+      .uuid({ message: VALIDATION_MESSAGES.STATION_ID_UUID }),
   })
   .required()
-  .strict({ message: VALIDATION_MESSAGES.UNKNOWN_KEY});
+  .strict({ message: VALIDATION_MESSAGES.UNKNOWN_KEY });

@@ -7,14 +7,13 @@ import { StationModule } from './charging-station/station.module';
 import { ConfigModule } from '@nestjs/config';
 import { ConfigService } from '@nestjs/config';
 
-const configService = new ConfigService()
+const configService = new ConfigService();
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env.local' }),
     ConnectorModule,
     StationModule,
-    // TODO: refactor
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: configService.get('DB_HOST'),
@@ -23,7 +22,7 @@ const configService = new ConfigService()
       password: configService.get<string>('DB_PASSWORD'),
       database: configService.get<string>('DB_NAME'),
       entities: [Station, Connector],
-      synchronize: true, //TODO: remove from prod
+      synchronize: true,
     }),
   ],
   controllers: [],

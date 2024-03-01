@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-// eslint-disable-next-line node/no-missing-import
 import { Station } from './station.entity';
 
 @Injectable()
@@ -19,8 +18,14 @@ export class StationService {
   }
 
   async create(
-    body: Pick<Station, 'title' | 'description' | 'email' | 'isPublic'>
+    body: Pick<
+      Station,
+      'title' | 'description' | 'email' | 'isPublic' | 'location'
+    >
   ): Promise<Station> {
-    return this.repository.save(body);
+    return this.repository.save({
+      ...body,
+      location: { type: 'Point', ...body.location },
+    });
   }
 }
