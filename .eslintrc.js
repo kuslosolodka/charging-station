@@ -11,6 +11,7 @@ module.exports = {
     'plugin:unicorn/recommended',
     'plugin:node/recommended',
     'plugin:node/recommended-module',
+    'plugin:security/recommended-legacy',
   ],
   root: true,
   env: {
