@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UsePipes } from '@nestjs/common';
+import { Controller, Get, Post, Body, UsePipes, Param } from '@nestjs/common';
 import { StationService } from './station.service.js';
 import { StationDto } from './types/dto/station.dto.js';
 import { ValidationPipe } from '../pipes/validation/validation.pipe.js';
@@ -11,6 +11,11 @@ export class StationController {
   @Get()
   getAll() {
     return this.service.findAll();
+  }
+
+  @Get(':id')
+  getOne(@Param('id') id: string) {
+    return this.service.findOne(id);
   }
 
   @Post()

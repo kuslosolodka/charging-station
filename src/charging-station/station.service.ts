@@ -17,6 +17,10 @@ export class StationService {
     });
   }
 
+  async findOne(id: string): Promise<Station> {
+    return await this.repository.findOneBy({ id });
+  }
+
   async create(
     body: Pick<
       Station,
