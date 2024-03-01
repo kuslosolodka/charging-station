@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Connector } from './connector.entity';
@@ -13,11 +13,16 @@ export class ConnectorService {
   async create(
     body: Pick<Connector, 'type' | 'maxKW' | 'station'>
   ): Promise<Connector> {
-    // const count = await this.repository.count({ where: { station: body.station.connectors } });
+    const count = await this.repository
+      .createQueryBuilder('connector')
+      .where('connector.station = :station', { station: body.station })
+      .getCount();
 
-    // if (count >= 8) {
-    //   throw new BadRequestException('A station can have a maximum of 8 connectors');
-    // }
+    if (count >= 8) {
+      throw new BadRequestException(
+        'Station cannot have more than 8 connectors'
+      );
+    }
 
     return this.repository.save(body);
   }
