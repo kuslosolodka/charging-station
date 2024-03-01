@@ -53,19 +53,19 @@ export const createStationValidationSchema = z
     }),
   })
   .strict(VALIDATION_MESSAGES.UNKNOWN_KEY)
-  .refine(data => data.isPublic ? data.title : true, {
+  .refine((data) => (data.isPublic ? data.title : true), {
     message: VALIDATION_MESSAGES.TITLE_REQUIRED,
-    path: ['title'] 
+    path: ['title'],
   })
-  .refine(data => data.isPublic ? data.email : true, {
+  .refine((data) => (data.isPublic ? data.email : true), {
     message: VALIDATION_MESSAGES.EMAIL_REQUIRED,
-    path: ['email']
+    path: ['email'],
   })
-  .refine(data => data.isPublic ? data.description : true, {
+  .refine((data) => (data.isPublic ? data.description : true), {
     message: VALIDATION_MESSAGES.DESCRIPTION_REQUIRED,
-    path: ['description']
+    path: ['description'],
   })
-  .refine(data => data.isPublic ? data.location : true, {
+  .refine((data) => (data.isPublic ? data.location : true), {
     message: VALIDATION_MESSAGES.LOCATION_REQUIRED,
-    path: ['location'] 
+    path: ['location'],
   });
